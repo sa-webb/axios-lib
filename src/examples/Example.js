@@ -1,4 +1,5 @@
-import axios from 'axios'
+import React from 'react';
+import axios from 'axios';
 
 function getCoffee() {
   return new Promise(resolve => {
@@ -20,11 +21,20 @@ async function go() {
     const userPromise = axios('https://randomuser.me/api/');
     const namePromise = axios('https://uinames.com/api/');
     // await all three promises to come back and destructure the result into their own variables
-    const [word, user, name] = await Promise.all([wordPromise, userPromise, namePromise]);
+    const [word, user, name] = await Promise.all([
+      wordPromise,
+      userPromise,
+      namePromise
+    ]);
     console.log(word.data, user.data, name.data); // cool, {...}, {....}
   } catch (e) {
     console.error(e); // 💩
   }
 }
 
-go();
+const Example = () => {
+  go();
+  return <h1>Check Console for results</h1>;
+};
+
+export default Example;
