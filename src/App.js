@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+async function go() {
+  try {
+    const confirmedPromise = axios('http://localhost:5000/us-confirmed-growth-curve/');
+    const recoveredPromise = axios('http://localhost:5000/us-recovered-growth-curve/');
+    const deathsPromise = axios('http://localhost:5000/us-deaths-growth-curve/');
+    // await all three promises to come back and destructure the result into their own variables
+    const [confirmed, recovered, deaths] = await Promise.all([
+      confirmedPromise,
+      recoveredPromise,
+      deathsPromise
+    ]);
+    console.log(confirmed.data[0].values, recovered.data[0].values, deaths.data[0].values); // cool, {...}, {....}
+  } catch (e) {
+    console.error(e); // 💩
+  }
 }
+
+const App = () => {
+  go();
+  return <h1>Check Console for results</h1>;
+};
 
 export default App;
