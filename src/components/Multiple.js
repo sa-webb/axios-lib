@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+/**
+ * Asynchronously fetching three endpoints with useState hooks.
+ */
+
 function Multiple() {
   const [data1, setData1] = useState();
   const [data2, setData2] = useState();
