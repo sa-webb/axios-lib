@@ -3,8 +3,8 @@ import axios from 'axios';
 async function AllPromise() {
   try {
     const response = await Promise.all([
-      axios.get('http://localhost:5000/us-growth-curve'),
-      axios.get('http://localhost:5000/data')
+      axios.get('http://localhost:5000/endpoint1'),
+      axios.get('http://localhost:5000/endpoint2')
     ]);
     const data = await response.json();
 
