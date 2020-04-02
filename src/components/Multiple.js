@@ -9,27 +9,21 @@ function Multiple() {
     let cancel = false;
 
     const runEffect = async () => {
-      const data1 = await axios(
-        'http://localhost:5000/us-confirmed-growth-curve/'
-      );
+      const data1 = await axios('http://localhost:5000/endpoint1/');
       if (cancel) {
         return;
       }
       setData1(data1);
       console.log(data1.data[0].values);
 
-      const data2 = await axios(
-        'http://localhost:5000/us-recovered-growth-curve/'
-      );
+      const data2 = await axios('http://localhost:5000/endpoint2/');
       if (cancel) {
         return;
       }
       setData2(data2);
       console.log(data2.data[0].values);
 
-      const data3 = await axios(
-        'http://localhost:5000/us-deaths-growth-curve/'
-      );
+      const data3 = await axios('http://localhost:5000/endpoint3/');
       if (cancel) {
         return;
       }
@@ -46,7 +40,14 @@ function Multiple() {
     };
   }, []);
 
-  return <h1>Check console for multiple results</h1>;
+  return (
+    <div>
+      <h1>Check console for multiple results</h1>
+      <p>{data1}</p>
+      <p>{data2}</p>
+      <p>{data3}</p>
+    </div>
+  );
 }
 
 export default Multiple;
